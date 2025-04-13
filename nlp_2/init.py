@@ -39,7 +39,7 @@ def read_doc(file_path):
     return document
 
 
-file_path = r'CV - Alex Barria.pdf'
+file_path = r'docs/CV - Alex Barria.pdf'
 total = read_doc(file_path)
 
 # %%
