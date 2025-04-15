@@ -10,7 +10,7 @@ from langchain_core.prompts import MessagesPlaceholder
 from pinecone import Pinecone
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.messages import AIMessage, HumanMessage
-from langchain.chains import create_retrieval_chain
+from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
@@ -65,13 +65,13 @@ retriever=vectorstore.as_retriever()
 
 # Incorporate the retriever into a question-answering chain.
 system_prompt = (
-    "You are an assistant for question-answering tasks. "
-    "Use the following pieces of retrieved context to answer "
-    "the question. If you don't know the answer, say that you "
-    "don't know. Use three sentences maximum and keep the "
-    "answer concise."
+    "You are an assistant specialized in answering questions based on provided context. "
+    "Carefully analyze the context below, derived from a CV and LinkedIn profile, to accurately respond. "
+    "If the answer is not explicitly found in the context, state clearly that you don't have enough information. "
+    "Be concise and professional."
     "\n\n"
-    "{context}"
+    "Take into account that all the context provided is related to Alex Barria."
+    "Context:\n{context}"
 )
 
 prompt = ChatPromptTemplate.from_messages(

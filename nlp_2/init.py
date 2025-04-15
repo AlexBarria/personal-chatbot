@@ -3,10 +3,10 @@ import os
 import time
 from dotenv import load_dotenv
 from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 from pinecone import Pinecone, ServerlessSpec
 from sentence_transformers import SentenceTransformer
 from langchain_pinecone import PineconeVectorStore
+from nlp_2.utils import chunk_data, SentenceTransformerWrapper
 
 # Load environment variables from a .env file
 load_dotenv()
@@ -44,23 +44,6 @@ total = read_doc(file_path)
 
 # %%
 # Split the document into chunks
-def chunk_data(docs, chunk_size=100, chunk_overlap=20):
-    """
-    Splits a list of documents into smaller chunks using a recursive character text splitter.
-
-    Args:
-        docs (list): A list of documents to be split. Each document is expected to be a string.
-        chunk_size (int, optional): The maximum size of each chunk. Defaults to 100.
-        chunk_overlap (int, optional): The number of overlapping characters between consecutive chunks. Defaults to 20.
-
-    Returns:
-        list: A list of chunks obtained by splitting the input documents.
-    """
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    doc = text_splitter.split_documents(docs)
-    return doc
-
 documents = chunk_data(docs=total, chunk_size=300, chunk_overlap=50)
 type(documents)
 
@@ -87,8 +70,6 @@ else:
 
 # %%
 # Load embedding model
-from utils import SentenceTransformerWrapper
-
 # Load the sentence transformer model
 raw_model = SentenceTransformer("jinaai/jina-embeddings-v2-small-en", trust_remote_code=True)
 
