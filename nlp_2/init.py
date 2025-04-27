@@ -17,7 +17,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 cloud = os.environ.get('PINECONE_CLOUD') or 'aws'
 region = os.environ.get('PINECONE_REGION') or 'us-east-1'
 namespace = os.environ.get('PINECONE_NAMESPACE')
-index_name = os.environ.get('PINECONE_INDEX_NAME')
+index_name = os.environ.get('PINECONE_BARRIA_INDEX_NAME')
 # %%
 # Read a single document
 def read_doc(file_path):
@@ -39,7 +39,9 @@ def read_doc(file_path):
     return document
 
 
-file_path = r'docs/CV - Alex Barria.pdf'
+# file_path = r'docs/CV - Alex Barria.pdf'
+file_path = r'docs/CV - Alex Barria - plain text.pdf'
+
 total = read_doc(file_path)
 
 # %%
@@ -72,7 +74,6 @@ else:
 # Load embedding model
 # Load the sentence transformer model
 raw_model = SentenceTransformer("jinaai/jina-embeddings-v2-small-en", trust_remote_code=True)
-
 # Wrap it for LangChain compatibility
 embed_model = SentenceTransformerWrapper(raw_model)
 
@@ -114,7 +115,7 @@ chat = ChatGroq(
 # %%
 from langchain.chains import RetrievalQA  
 
-query = "Give me a 1 paragraph summary about Alex"
+query = "Give me a 1 paragraph summary about Clara"
 
 qa_cv = RetrievalQA.from_chain_type(
     llm=chat,
