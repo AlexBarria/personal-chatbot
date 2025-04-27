@@ -19,7 +19,6 @@ from sentence_transformers import SentenceTransformer
 application = Flask(__name__)
 application.secret_key = os.getenv("FLASK_SECRET_KEY")
 
-# os.environ['OPEN_API_KEY'] = OPENAI_API_KEY
 LANGCHAIN_TRACING_V2 = True
 
 # Load environment variables from a .env file
@@ -28,7 +27,7 @@ load_dotenv()
 # Store environment variables in separate variables
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-index_name = os.getenv("PINECONE_INDEX_NAME")
+index_name = os.getenv("PINECONE_BARRIA_INDEX_NAME")
 namespace = os.getenv("PINECONE_NAMESPACE")
 
 
