@@ -23,6 +23,8 @@ webdriver-manager = "^4.0.2"
 langchain-openai = "^0.3.12"
 faiss-cpu = "^1.10.0"
 langgraph = "^0.3.30"
+graphviz = "^0.20.3"
+matplotlib = "^3.10.1"
 
 
 [tool.poetry.group.dev.dependencies]
